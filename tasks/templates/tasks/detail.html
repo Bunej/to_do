@@ -1,0 +1,10 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<span class="title">{{ task.name }}</span>
+<br>
+<span class="subtitle">{{ task.description }}</span>
+<br>
+{% if request.user == task.user %}
+<a href="{% url 'change_status' id=task.id %}"><span class="subtitle" style="color:blue">Change Status</span></a>
+{% endif %}
+{% endblock %}

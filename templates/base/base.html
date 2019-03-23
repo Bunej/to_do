@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>To Do App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+</head>
+
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    <a href="{% url 'index' %}">To Do</a>
+                </h1>
+                {% if user.is_authenticated %}
+                <h2>
+                    <a href="{% url 'create_task' %}">Create Task</a>
+                </h2>
+                <h2>
+                    <a href="{% url 'user_tasks' %}">My tasks</a>
+                </h2>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    <form method="GET" action="{% url 'search' %}">
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                                <input class="input" placeholder="Search Task" type="text" name="q" value="{{request.GET.q}}">
+                            </div>
+                            <div class="control">
+                                <button type="submit" class="button is-info">
+                                    Search Task
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                    {% block content %}
+                                    {% endblock %}
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    </footer>
+</body>
+
+</html>

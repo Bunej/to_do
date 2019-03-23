@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    {% block tasks %}
+    {% for tasks in tasks %}
+    <a href="{% url 'detail' id=tasks.id %}">
+        <span class="title">{{ tasks.name }}</span>
+    </a>
+    <br>
+    <span class="subtitle">{{ tasks.user }}</span>
+    <br>
+    <span class="subtitle">{{ tasks.end_date }}</span>
+    <br>
+    {% if tasks.end_date == date and tasks.status == "New" %}
+    <span class="subtitle" style="color:red">{{ tasks.status }}</span>
+    {% elif tasks.end_date < date and tasks.status == "New" %}
+    <span class="subtitle" style="color:red">{{ tasks.status }}</span>
+    {% elif tasks.status == "Done" %}
+    <span class="subtitle" style="color:green">{{ tasks.status }}</span>
+    {% else %}
+    <span class="subtitle" style="color:blue">{{ tasks.status }}</span>
+    {% endif %}
+    <br>
+    {% endfor %}
+    {% endblock %}
+{% endblock %}
